@@ -1,0 +1,85 @@
+/*
+      ==============================================
+      Dd's Remember the Milk Smart List Query Editor
+      ==============================================
+
+      February 11, 2021
+
+      Locations:
+      
+      AnyWhere
+      Errand
+      Home
+      Online
+      Phone
+
+      Tags:
+
+      _bills
+      _bizhours
+      _career
+      _health
+      _house
+      _legal
+      _medium
+      _night
+      _school
+      _work
+      adoption
+      wedding
+
+*/
+
+
+
+// !active
+
+hasSubtasks:false AND ( (priority:1 AND isLocated:true) OR (priority:2 AND hasNotes:true) ) AND ( dueBefore:today OR dueWithin:"1 week of today" OR tagContains:important OR due:never)
+
+// !bizhours
+
+tag:_bizhours and hasSubtasks:false
+
+// !followup
+
+hasSubtasks:false and priority:2
+
+// !projects
+
+hasSubtasks:true OR tagContains:project
+
+// !someday
+
+priority:3 and hasSubtasks:false
+
+// !stale
+
+isSubtask:false and postponed:>5
+
+// !zero
+
+hasSubtasks:false AND ( (priority:1 AND isLocated:false) OR (priority:2 AND hasNotes:false AND isGiven:false) OR (priority:none) OR (tag:_auto AND NOT (tag:_bills tag:visa OR tag: mast OR tag:amex OR tag:genn OR isRepeating:true) ) )
+
+// @AnyWhere
+
+hasSubtasks:false AND priority:1 AND location:AnyWhere AND (dueWithin:"1 week of today" OR dueBefore:today OR due:never)
+
+// @Errand
+
+hasSubtasks:false AND priority:1 AND location:Errand AND (dueWithin:"1 week of today" OR dueBefore:today OR due:never)
+
+// @Home
+
+hasSubtasks:false AND priority:1 AND location:Home AND (dueWithin:"1 week of today" OR dueBefore:today OR due:never)
+
+// @Online
+
+hasSubtasks:false AND priority:1 AND location:Online AND (dueWithin:"1 week of today" OR dueBefore:today OR due:never)
+
+// @Phone
+
+hasSubtasks:false AND priority:1 AND location:Phone AND (dueWithin:"1 week of today" OR dueBefore:today OR due:never)
+
+// Recurring Tasks
+
+isRepeating:true
